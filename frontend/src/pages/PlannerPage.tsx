@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Truck,
   Play,
@@ -38,6 +38,12 @@ export const PlannerPage: React.FC<PlannerPageProps> = ({ scenario, onRefreshSce
   const [selectedShipment, setSelectedShipment] = useState<ShipmentPlan | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [searchFilter, setSearchFilter] = useState('');
+
+  useEffect(() => {
+    if (scenario?.id) {
+      handleRunBoth();
+    }
+  }, [scenario?.id]);
 
   const handleRunBoth = async () => {
     if (!scenario) return;

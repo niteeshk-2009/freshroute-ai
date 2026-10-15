@@ -49,6 +49,9 @@ export const App: React.FC = () => {
     try {
       const sc = await fetchScenario(id);
       setCurrentScenario(sc);
+      if (sc && sc.inventory_batches) {
+        setInventoryBatches(sc.inventory_batches);
+      }
     } catch (err) {
       console.error('Failed to load selected scenario', err);
     } finally {
