@@ -172,7 +172,7 @@ npm run dev
 cd backend
 python -m pytest tests/ -v
 ```
-**Test Results:** **43 passed, 0 failed** across unit, constraint, algorithmic, scenario, and API test suites.
+**Test Results:** **44 passed, 0 failed** across unit, constraint, algorithmic, scenario, and API test suites.
 
 ---
 
@@ -189,9 +189,11 @@ python -m pytest tests/ -v
 
 ## 10. Known Limitations & Roadmap
 
-- **Heuristic Nature:** Uses greedy allocation with local neighborhood search; does not compute mathematical global optima via branch-and-cut solvers.
-- **Elasticity Assumption:** Markdown demand increase uses an illustrative linear multiplier (1.5x) rather than econometric empirical price elasticity curves.
-- **Roadmap:**
-  1. Mixed-Integer Linear Programming (MILP) formulation with HiGHS or CBC solver.
-  2. Multi-depot routing coordination across multiple agricultural aggregation centers.
-  3. Dynamic temperature sensor telemetry integration for real-time shelf-life re-estimation.
+- **Heuristic Classification:** Uses greedy allocation with transport local search; does not claim global optimality via branch-and-bound.
+- **Elasticity Assumption:** Markdown demand response uses an illustrative linear multiplier (1.5x) rather than econometric empirical price elasticity curves.
+- **Data Disclosure:** Uses deterministic synthetic agricultural data based on Maharashtra (Nashik hub) and major Indian APMC wholesale mandis (Delhi, Mumbai, Pune, Jaipur, Lucknow, Nagpur). No live GPS or distributor API data was fabricated.
+- **Active Development Roadmap:**
+  1. **Gemma 4 Decision Copilot:** Integration with Gemma 4 model for interactive conversational trade-off explanations and scenario sensitivity querying.
+  2. **Mixed-Integer Linear Programming (MILP):** Exact mathematical optimization with HiGHS or CBC solver to compare against current heuristic.
+  3. **Multi-Depot Routing:** Coordinated dispatch across multiple agricultural cold-chain aggregation hubs.
+
