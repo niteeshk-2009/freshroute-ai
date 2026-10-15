@@ -164,3 +164,12 @@ def test_api_templates_download():
         assert response.status_code == 200
         assert "text/csv" in response.headers.get("content-type", "")
         assert len(response.text) > 0
+
+
+def test_api_get_scenario_discounts():
+    """GET /api/scenarios/{id}/discounts returns discount recommendations."""
+    response = client.get("/api/scenarios/EVAL-01-NORMAL/discounts")
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data, list)
+

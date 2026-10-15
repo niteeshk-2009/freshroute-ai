@@ -273,6 +273,14 @@ def generate_scenario_report(scenario_id: str) -> Dict[str, Any]:
     }
 
 
+@router.get("/scenarios/{scenario_id}/discounts", tags=["Engine"])
+def get_scenario_discounts(scenario_id: str) -> List[Dict[str, Any]]:
+    """Calculates dynamic discount recommendations for at-risk batches."""
+    scenario = get_scenario(scenario_id)
+    opt_eval = run_heuristic_optimizer(scenario)
+    return generate_discount_recommendations(scenario, opt_eval.shipments)
+
+
 @router.get("/inventory", response_model=List[InventoryBatch], tags=["Inventory"])
 def get_inventory() -> List[InventoryBatch]:
     """Returns the current active warehouse inventory batches."""

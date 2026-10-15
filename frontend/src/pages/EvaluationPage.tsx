@@ -80,7 +80,7 @@ export const EvaluationPage: React.FC<EvaluationPageProps> = ({ scenarios }) => 
               <BarChart3 className="h-6 w-6 text-forest-700" />
               Comparative Performance Evaluation & Benchmark Suite
             </h2>
-            <Badge variant="success" size="sm">M5 Requirement</Badge>
+            <Badge variant="success" size="sm">Controlled Benchmark Suite</Badge>
           </div>
           <p className="text-xs text-slate-500 mt-1">
             Fair side-by-side benchmarking on identical scenarios, hard constraints, and economic models with disclosed assumptions.
@@ -189,7 +189,7 @@ export const EvaluationPage: React.FC<EvaluationPageProps> = ({ scenarios }) => 
                   Exact mathematical calculations matching official economic equations
                 </p>
               </div>
-              <Badge variant="info" size="sm">Identical Inputs Tested</Badge>
+              <Badge variant="info" size="sm">Controlled Baseline Comparison</Badge>
             </div>
 
             <div className="overflow-x-auto">

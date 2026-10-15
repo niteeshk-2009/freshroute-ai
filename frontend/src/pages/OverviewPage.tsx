@@ -140,7 +140,7 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({
               FreshRoute Operations Intelligence
             </span>
             <span className="h-1.5 w-1.5 rounded-full bg-fresh-lime" />
-            <span className="text-xs text-forest-200">PS-07 Decision Support</span>
+            <span className="text-xs text-forest-200">Intelligent Dispatch Engine</span>
           </div>
           <h2 className="text-2xl font-bold tracking-tight">Executive Operations Dashboard</h2>
           <p className="mt-1 text-xs text-forest-100 max-w-2xl leading-relaxed">
@@ -328,7 +328,7 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({
               <h3 className="text-sm font-bold text-slate-900">Economic Breakdown (₹ in Thousands)</h3>
               <p className="text-xs text-slate-500">Gross revenue, transport costs, and net profit</p>
             </div>
-            <Badge variant="info" size="sm">Economic Model C8</Badge>
+            <Badge variant="info" size="sm">Unit Economics Accounting</Badge>
           </div>
           <div className="h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">

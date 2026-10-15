@@ -115,7 +115,7 @@ export const SimulatorPage: React.FC<SimulatorPageProps> = ({ scenario }) => {
               <Sliders className="h-6 w-6 text-forest-700" />
               Disruption-Aware Scenario Simulator
             </h2>
-            <Badge variant="warning" size="sm">Official Extension</Badge>
+            <Badge variant="warning" size="sm">Operational Re-planning</Badge>
           </div>
           <p className="text-xs text-slate-500 mt-1">
             Simulate highway delays, mandi demand shocks, fleet capacity squeezes, and route closures in real-time.
@@ -167,7 +167,7 @@ export const SimulatorPage: React.FC<SimulatorPageProps> = ({ scenario }) => {
             onChange={(e) => setDelayHours(parseFloat(e.target.value))}
             className="w-full accent-forest-700"
           />
-          <p className="text-[11px] text-slate-400">Adds transit time, testing C7 shelf-life expiry buffer.</p>
+          <p className="text-[11px] text-slate-400">Adds transit time, evaluating shelf-life safety buffers upon arrival.</p>
         </div>
 
         {/* Mandi Demand Scale */}
@@ -209,7 +209,7 @@ export const SimulatorPage: React.FC<SimulatorPageProps> = ({ scenario }) => {
             onChange={(e) => setCapacityMultiplier(parseFloat(e.target.value))}
             className="w-full accent-forest-700"
           />
-          <p className="text-[11px] text-slate-400">Simulates vehicle breakdown or diesel quota restriction.</p>
+          <p className="text-[11px] text-slate-400">Simulates vehicle breakdown or fuel shortage constraints.</p>
         </div>
 
         {/* Route Closure */}
@@ -217,7 +217,7 @@ export const SimulatorPage: React.FC<SimulatorPageProps> = ({ scenario }) => {
           <div className="flex justify-between items-center text-xs">
             <span className="font-bold text-slate-700 flex items-center gap-1.5">
               <AlertTriangle className="h-4 w-4 text-purple-500" />
-              Disable Route (C5)
+              Route Closure
             </span>
             {disabledRouteId && <Badge variant="danger" size="sm">Closed</Badge>}
           </div>
@@ -233,7 +233,7 @@ export const SimulatorPage: React.FC<SimulatorPageProps> = ({ scenario }) => {
               </option>
             ))}
           </select>
-          <p className="text-[11px] text-slate-400">Tests C5 constraint rejection and dynamic rerouting.</p>
+          <p className="text-[11px] text-slate-400">Simulates roadblocks or weather closures to test rerouting feasibility.</p>
         </div>
       </div>
 

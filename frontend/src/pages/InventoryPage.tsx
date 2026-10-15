@@ -95,7 +95,7 @@ export const InventoryPage: React.FC<InventoryPageProps> = ({ batches, onRefresh
             Central Hub Inventory Batches
           </h2>
           <p className="text-xs text-slate-500 mt-0.5">
-            M1 Requirement: Commodity, available quantity (kg), and remaining shelf-life estimates.
+            Active warehouse inventory batches with commodity types, available quantities (kg), and remaining shelf-life estimates.
           </p>
         </div>
 

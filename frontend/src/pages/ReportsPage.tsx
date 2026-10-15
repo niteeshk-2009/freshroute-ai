@@ -113,7 +113,7 @@ export const ReportsPage: React.FC<ReportsPageProps> = ({ scenario }) => {
                   FreshRoute AI Decision-Support Platform
                 </span>
                 <span className="h-1.5 w-1.5 rounded-full bg-forest-700" />
-                <span className="text-xs text-slate-400 font-mono">PS 07 Report</span>
+                <span className="text-xs text-slate-400 font-mono">Operations Audit</span>
               </div>
               <h1 className="text-2xl font-black text-slate-900 mt-1">
                 Perishable Produce Allocation Audit
@@ -127,7 +127,7 @@ export const ReportsPage: React.FC<ReportsPageProps> = ({ scenario }) => {
               <div>Date: {new Date(reportData.created_at).toLocaleDateString()}</div>
               <div>Hub: Nashik Central Agro-Hub</div>
               <div className="mt-1">
-                <Badge variant="success" size="sm">C1-C10 Compliant</Badge>
+                <Badge variant="success" size="sm">Feasibility Validated</Badge>
               </div>
             </div>
           </div>
@@ -165,7 +165,7 @@ export const ReportsPage: React.FC<ReportsPageProps> = ({ scenario }) => {
           {/* Section 2: Core Metrics Table */}
           <div>
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
-              2. Core Outcome Metrics (Mandatory M5)
+              2. Core Distribution Performance Metrics
             </h3>
             <table className="w-full text-left text-xs border border-slate-200 rounded-xl overflow-hidden">
               <thead className="bg-slate-50 text-slate-500 border-b border-slate-200">

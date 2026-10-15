@@ -27,7 +27,7 @@ export async function fetchScenario(id: string): Promise<Scenario> {
   return res.json();
 }
 
-export async function runBaseline(scenarioId: string): Promise<{ result: EvaluationResult }> {
+export async function runBaseline(scenarioId: string): Promise<EvaluationResult> {
   const res = await fetch(`${API_BASE}/scenarios/${scenarioId}/baseline`, {
     method: 'POST',
   });
@@ -35,16 +35,21 @@ export async function runBaseline(scenarioId: string): Promise<{ result: Evaluat
   return res.json();
 }
 
-export async function runOptimizer(scenarioId: string): Promise<{
-  result: EvaluationResult;
-  discount_recommendations: any[];
-  shipments: any[];
-  rejected_candidates: any[];
-}> {
+export async function runOptimizer(scenarioId: string): Promise<EvaluationResult> {
   const res = await fetch(`${API_BASE}/scenarios/${scenarioId}/optimize`, {
     method: 'POST',
   });
   if (!res.ok) throw new Error('Failed to run optimizer allocation');
+  return res.json();
+}
+
+export async function fetchDiscounts(scenarioId: string): Promise<any[]> {
+  const res = await fetch(`${API_BASE}/scenarios/${scenarioId}/discounts`);
+  if (!res.ok) {
+    // Graceful fallback to report if discount endpoint fails
+    const report = await fetchReport(scenarioId);
+    return report.discount_recommendations || [];
+  }
   return res.json();
 }
 
