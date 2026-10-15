@@ -33,10 +33,11 @@ app = FastAPI(
     redoc_url="/redoc",
 )
 
-# CORS configuration for Frontend (Vite on localhost:5173)
+# CORS configuration for Frontend (Vite on localhost, Netlify, and custom domains)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS,
+    allow_origin_regex=r"https://.*\.netlify\.app|https://.*\.vercel\.app|http://localhost:.*",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
