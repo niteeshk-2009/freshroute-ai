@@ -76,7 +76,7 @@ export const ReportsPage: React.FC<ReportsPageProps> = ({ scenario }) => {
             <Badge variant="info" size="sm">Print & CSV Export</Badge>
           </div>
           <p className="text-xs text-slate-500 mt-1">
-            Official PS-07 decision documentation for judging review, audit compliance, and stakeholder sign-off.
+            Audited dispatch decision documentation for operational transparency, compliance, and stakeholder review.
           </p>
         </div>
 

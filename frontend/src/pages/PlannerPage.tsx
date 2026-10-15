@@ -83,14 +83,14 @@ export const PlannerPage: React.FC<PlannerPageProps> = ({ scenario, onRefreshSce
           <div className="flex items-center gap-2">
             <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
               <Truck className="h-6 w-6 text-forest-700" />
-              Distribution Dispatch Planner
+              Distribution Planner
             </h2>
             <Badge variant="success" size="sm">
               All Feasibility Rules Enforced
             </Badge>
           </div>
           <p className="text-xs text-slate-500 mt-1">
-            Demand-aware allocation, shelf-life arrival feasibility, and dynamic markdown decisions.
+            Build a feasible dispatch plan that balances shelf life, demand, transport capacity and profitability.
           </p>
         </div>
 
@@ -105,7 +105,7 @@ export const PlannerPage: React.FC<PlannerPageProps> = ({ scenario, onRefreshSce
             ) : (
               <Play className="h-4 w-4 text-fresh-lime" />
             )}
-            {running ? 'Solving Allocations...' : 'Run Both Strategies'}
+            {running ? 'Solving Allocations...' : 'Generate Dispatch Plan'}
           </button>
         </div>
       </div>
@@ -176,7 +176,7 @@ export const PlannerPage: React.FC<PlannerPageProps> = ({ scenario, onRefreshSce
               className="inline-flex items-center gap-2 rounded-xl bg-forest-900 px-6 py-2.5 text-xs font-bold text-white shadow hover:bg-forest-800 active:scale-95 transition"
             >
               <Play className="h-4 w-4 text-fresh-lime" />
-              Run Both Strategies Now
+              Generate Dispatch Plan
             </button>
           </div>
         </div>

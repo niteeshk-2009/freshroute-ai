@@ -257,7 +257,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ scenario, onRefreshS
             <Shield className="h-5 w-5 text-forest-700" />
             <div>
               <h3 className="text-sm font-bold text-slate-900">
-                Methodology & Hard Constraints Verification Matrix (C1–C10)
+                Operational Feasibility Constraints & Methodology Matrix
               </h3>
               <p className="text-xs text-slate-500">
                 Mathematical formulations enforced by the FreshRoute optimization solver and baseline comparator.

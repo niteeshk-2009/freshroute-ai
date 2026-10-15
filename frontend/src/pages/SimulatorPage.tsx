@@ -298,7 +298,7 @@ export const SimulatorPage: React.FC<SimulatorPageProps> = ({ scenario }) => {
           <div className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
             <div className="px-5 py-3.5 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
               <h3 className="text-xs font-bold text-slate-800">
-                Affected Shipments ({simulationData.affected_shipments.length} Modifications Detected)
+                Affected Shipments ({(simulationData.affected_shipments || []).length} Modifications Detected)
               </h3>
               <Badge variant="info" size="sm">Dynamic Reallocation</Badge>
             </div>
@@ -315,7 +315,7 @@ export const SimulatorPage: React.FC<SimulatorPageProps> = ({ scenario }) => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
-                  {simulationData.affected_shipments.map((item, idx) => (
+                  {(simulationData.affected_shipments || []).map((item, idx) => (
                     <tr key={idx} className="hover:bg-slate-50 transition">
                       <td className="py-2.5 px-4 font-mono font-bold text-slate-900">{item.batch_id}</td>
                       <td className="py-2.5 px-4 text-slate-700">{item.destination_id}</td>
