@@ -268,13 +268,14 @@ export const PlannerPage: React.FC<PlannerPageProps> = ({ scenario, onRefreshSce
               </div>
               <div className="flex items-center gap-2">
                 <div className="relative">
-                  <Search className="h-3.5 w-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <Search className="h-3.5 w-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400" aria-hidden="true" />
                   <input
                     type="text"
                     placeholder="Filter batch or mandi..."
+                    aria-label="Filter shipments by batch ID, destination mandi, or transport route"
                     value={searchFilter}
                     onChange={(e) => setSearchFilter(e.target.value)}
-                    className="pl-8 pr-3 py-1 rounded-lg border border-slate-200 bg-white text-xs text-slate-700 focus:outline-none focus:ring-1 focus:ring-forest-700 w-44"
+                    className="pl-8 pr-3 py-1 rounded-lg border border-slate-200 bg-white text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 w-44 transition"
                   />
                 </div>
                 <Badge variant="success" size="sm">
@@ -283,24 +284,24 @@ export const PlannerPage: React.FC<PlannerPageProps> = ({ scenario, onRefreshSce
               </div>
             </div>
 
-            <div className="overflow-x-auto max-h-[520px] overflow-y-auto">
+            <div className="overflow-x-auto max-h-[520px] overflow-y-auto" role="region" aria-label="Dispatch Shipment Allocation Table">
               {filteredShipments.length === 0 ? (
                 <div className="p-8 text-center text-xs text-slate-400">
                   {rawShipments.length === 0
-                    ? 'No shipments calculated. Click Run Both Strategies above.'
+                    ? 'No shipments calculated. Click Generate Dispatch Plan above.'
                     : 'No shipments match your filter criteria.'}
                 </div>
               ) : (
-                <table className="w-full text-left text-xs">
+                <table className="w-full text-left text-xs" aria-label="Feasible Produce Dispatches">
                   <thead className="sticky top-0 bg-slate-50 border-b border-slate-200 text-slate-500">
                     <tr>
-                      <th className="py-2.5 px-3 font-semibold">Batch</th>
-                      <th className="py-2.5 px-3 font-semibold">Destination Mandi</th>
-                      <th className="py-2.5 px-3 font-semibold">Transport</th>
-                      <th className="py-2.5 px-3 font-semibold">Weight</th>
-                      <th className="py-2.5 px-3 font-semibold">Delivery Remaining</th>
-                      <th className="py-2.5 px-3 font-semibold">Net Contribution</th>
-                      <th className="py-2.5 px-2"></th>
+                      <th scope="col" className="py-2.5 px-3 font-semibold">Batch</th>
+                      <th scope="col" className="py-2.5 px-3 font-semibold">Destination Mandi</th>
+                      <th scope="col" className="py-2.5 px-3 font-semibold">Transport</th>
+                      <th scope="col" className="py-2.5 px-3 font-semibold">Weight</th>
+                      <th scope="col" className="py-2.5 px-3 font-semibold">Delivery Remaining</th>
+                      <th scope="col" className="py-2.5 px-3 font-semibold">Net Contribution</th>
+                      <th scope="col" className="py-2.5 px-2" aria-label="Selection indicator"></th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
@@ -314,8 +315,18 @@ export const PlannerPage: React.FC<PlannerPageProps> = ({ scenario, onRefreshSce
                       return (
                         <tr
                           key={`${s.batch_id}-${s.transport_id}-${s.destination_id}-${idx}`}
+                          tabIndex={0}
+                          role="button"
+                          aria-pressed={isSelected}
+                          aria-label={`Shipment ${s.batch_id} to ${s.destination_id.replace('DEST-', '')}, ${s.allocated_qty_kg} kg`}
                           onClick={() => setSelectedShipment(s)}
-                          className={`cursor-pointer transition ${
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              setSelectedShipment(s);
+                            }
+                          }}
+                          className={`cursor-pointer transition focus:outline-none focus-visible:ring-2 focus-visible:ring-forest-600 ${
                             isSelected ? 'bg-forest-50/80 font-medium' : 'hover:bg-slate-50'
                           }`}
                         >

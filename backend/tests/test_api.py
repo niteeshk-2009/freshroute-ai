@@ -173,3 +173,36 @@ def test_api_get_scenario_discounts():
     data = response.json()
     assert isinstance(data, list)
 
+
+def test_planner_shipments_contract_always_present():
+    """Regression test: verifies optimizer and baseline always include 'shipments' as a list.
+    Even on scenarios with zero feasible dispatches, shipments must never be missing or undefined.
+    """
+    for sc_id in ["EVAL-01-NORMAL", "EVAL-08-NO-FEASIBLE", "EVAL-09-ZERO-DEMAND"]:
+        res_opt = client.post(f"/api/scenarios/{sc_id}/optimize")
+        assert res_opt.status_code == 200
+        data_opt = res_opt.json()
+        assert "shipments" in data_opt, f"Optimizer response missing 'shipments' for {sc_id}"
+        assert isinstance(data_opt["shipments"], list)
+
+        res_base = client.post(f"/api/scenarios/{sc_id}/baseline")
+        assert res_base.status_code == 200
+        data_base = res_base.json()
+        assert "shipments" in data_base, f"Baseline response missing 'shipments' for {sc_id}"
+        assert isinstance(data_base["shipments"], list)
+
+
+def test_api_metric_definitions_consistency():
+    """Verifies that net profit strictly satisfies the audited formula across strategies:
+    net_revenue == total_revenue - (transport + handling + holding + spoilage costs)
+    """
+    for endpoint in ["baseline", "optimize"]:
+        res = client.post(f"/api/scenarios/EVAL-01-NORMAL/{endpoint}")
+        assert res.status_code == 200
+        d = res.json()
+        calculated_net = d["total_revenue"] - (
+            d["total_transport_cost"] + d["total_handling_cost"] + d["total_holding_cost"] + d["total_spoilage_cost"]
+        )
+        assert abs(d["net_revenue"] - calculated_net) < 0.05, f"Net revenue formula mismatch in {endpoint}"
+
+
