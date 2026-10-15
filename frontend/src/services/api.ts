@@ -7,7 +7,8 @@ import {
   SimulationModifications,
 } from '../types';
 
-const API_BASE = '/api';
+const rawApiUrl = (import.meta as any).env?.VITE_API_URL;
+const API_BASE = rawApiUrl ? `${rawApiUrl.replace(/\/+$/, '')}/api` : '/api';
 
 export async function fetchHealth() {
   const res = await fetch(`${API_BASE}/health`);
