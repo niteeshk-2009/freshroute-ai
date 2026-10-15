@@ -302,11 +302,15 @@ cd freshroute-ai
 # Navigate to backend directory
 cd backend
 
-# Create and activate virtual environment (optional but recommended)
+# Create virtual environment
 python -m venv venv
-# On Windows:
-.\venv\Scripts\activate
-# On Linux/macOS:
+
+# Activate virtual environment:
+# On Windows (PowerShell):
+.\venv\Scripts\Activate.ps1
+# On Windows (Command Prompt):
+.\venv\Scripts\activate.bat
+# On Linux / macOS:
 source venv/bin/activate
 
 # Install dependencies
@@ -353,7 +357,7 @@ VITE_API_URL=http://localhost:8000
 | Method | Endpoint | Description |
 |---|---|---|
 | `GET` | `/api/health` | Health check & system uptime metadata. |
-| `GET` | `/api/scenarios` | Lists all 11 available scenarios with summary stats. |
+| `GET` | `/api/scenarios` | Lists all 11 scenarios (1 default operational scenario + 10 held-out benchmarks). |
 | `GET` | `/api/scenarios/{id}` | Retrieves full scenario data (batches, mandis, transports). |
 | `POST` | `/api/scenarios/{id}/baseline` | Executes Earliest-Expiry-First baseline allocation. |
 | `POST` | `/api/scenarios/{id}/optimize` | Executes multi-criteria heuristic optimization. |

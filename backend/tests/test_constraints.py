@@ -232,6 +232,38 @@ def test_c7_shelf_life_timing(base_scenario):
     assert "SHELF_LIFE_EXCEEDED" in reasons
 
 
+def test_c7_spoilage_threshold_buffer_boundary():
+    """C7: Verifies exact shelf-life safety buffer threshold (spoilage_threshold_hours)."""
+    from app.engine.constraints import check_shelf_life
+    batch = InventoryBatch(
+        id="B_BOUNDARY",
+        commodity="Tomatoes",
+        quantity_kg=500.0,
+        remaining_shelf_life_hours=20.0,
+    )
+    # Total transit = 12h travel + 4h handling = 16h transit -> 4.0h buffer remaining at delivery
+    transport = TransportOption(
+        id="T_BOUNDARY",
+        origin="Hub",
+        destination_id="D1",
+        travel_time_hours=12.0,
+        cost_per_kg=2.0,
+        capacity_kg=1000.0,
+        handling_time_hours=4.0,
+    )
+    # Case 1: Threshold = 4.0h (delivery buffer is 4.0h >= 4.0h) -> FEASIBLE
+    passed, reason, _ = check_shelf_life(batch, transport, spoilage_threshold_hours=4.0)
+    assert passed
+    assert reason is None
+
+    # Case 2: Threshold = 4.5h (delivery buffer is 4.0h < 4.5h) -> INFEASIBLE
+    passed, reason, msg = check_shelf_life(batch, transport, spoilage_threshold_hours=4.5)
+    assert not passed
+    assert reason == "SHELF_LIFE_EXCEEDED"
+    assert "remaining at delivery 4.0h < threshold 4.5h" in msg
+
+
+
 def test_c8_unit_consistency():
     """C8: Unit must be kg."""
     with pytest.raises(ValueError):
